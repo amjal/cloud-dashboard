@@ -1,0 +1,84 @@
+body{
+	background-color:rgb(240,240,240);
+}
+nav{
+	display:block;
+	width:100%;
+	background-color:rgb(180,180,180);
+	box-shadow: 4px 0px 8px grey;
+	position:fixed;
+	top:0;
+	left:0;
+	z-index:2;
+	padding:10px;
+}
+a, a:active, a:visited{
+	text-decoration:none;
+	color:rgb(20,20,20);
+	padding:10px;
+}
+input[name="command"]{
+	margin:20px;
+	width:90%;
+}
+.dropdown{
+	display:inline-block;
+}
+.dropdown-content{
+	position:absolute;
+	height:0px;
+	width:140px;
+	overflow:hidden;
+	border: solid;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-width: 0px;
+	background-color:rgb(180,180,180);
+	transition: height 0.5s linear;
+	text-align:center;
+}
+.dropdown:hover .dropdown-content{
+	height:300px;
+}
+.dropdown-content a{
+	display:block;
+}
+.card{
+	vertical-align:top;
+	display:inline-block;
+	width:30%;
+	margin:20px;
+	background-color:rgb(220,220,220);
+	border-radius:5px;
+}
+.card-header{
+	text-align:center;
+	font-size:24px;
+	color:rgb(0,51,204);
+}
+.card-item{
+	padding:10px;
+	margin:20px;
+	border-top:solid;
+	border-width:0.1px;
+	border-color:rgb(181,181,181);
+}
+.field-title{
+	color:rgb(10,61,194);
+}
+.card-button{
+	position:relative;
+	left:40%;
+	border-radius:5px;
+	border: solid;
+	border-width:1px;
+	padding:10px;
+	background-color:rgb(220,220,220);
+	transition: background-color 0.3s;
+}
+.card-button:hover {
+	background-color:rgb(180,180,180);
+}
+#nav-place-holder{
+	height:50px;
+}
