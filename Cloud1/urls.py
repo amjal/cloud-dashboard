@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from Cloud1 import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('change_status/', views.change_status, name='turn_off')
 ]
