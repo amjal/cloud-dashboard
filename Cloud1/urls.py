@@ -22,7 +22,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('change_status/', views.change_status, name='change_status'),
-    path('change_config/', views.change_config, name='change_config')
     path('change_config/', views.change_config, name='change_config'),
     path('clone/', views.clone, name='clone'),
     path('remove/', views.remove, name='remove'),
