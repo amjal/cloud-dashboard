@@ -1,6 +1,9 @@
 body{
 	background-color:rgb(240,240,240);
 }
+ul{
+	padding:0;
+}
 nav{
 	display:block;
 	width:100%;
@@ -27,9 +30,8 @@ input[name="command"]{
 .dropdown-content{
 	position:absolute;
 	height:0px;
-	width:140px;
+	width:150px;
 	overflow:hidden;
-	border: solid;
 	border-bottom-right-radius: 5px;
 	border-bottom-left-radius: 5px;
 	border-width: 0px;
@@ -39,9 +41,6 @@ input[name="command"]{
 }
 .dropdown:hover .dropdown-content{
 	height:300px;
-}
-.dropdown-content a{
-	display:block;
 }
 .card{
 	vertical-align:top;

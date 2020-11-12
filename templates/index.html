@@ -5,10 +5,31 @@
 		<meta name="viewport" content="width-device-width,initial-scale=1">
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script type="text/javascript">
-			$(".dropdown a").click(function(){
+		{{ vms|json_script:"script-id"}}
+		<script>
+			$(function(){
+				let current_vm = "vm1";
+				const vms = JSON.parse($("#script-id").text());
+				for (const vm in vms){
+					if (vm !== current_vm){
+						$("#"+vm).css("display","none");
+					}
+				}
+				$(".dropdown-content p").click(function(){
+					current_vm = ($(this).text());
+					const vms = JSON.parse($("#script-id").text());
+					for (const vm in vms){
+						if (vm !== current_vm){
+							$("#"+vm).css("display","none");
+						}
+						else{
+							$("#"+vm).css("display","block");
+						}
 
-			$("#	
+					}
+				});
+			});
+
 		</script>
 	</head>
 	<body>
@@ -17,7 +38,7 @@
 				<span> Virtual Machines </span>
 				<div class="dropdown-content">
 					{% for key, value in vms.items %}
-						<a href="">{{ value.name  }}</a>
+						<p href="">{{ value.name }}</p>
 					{% endfor %}
 				</div>
 			</div>

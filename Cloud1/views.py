@@ -25,6 +25,7 @@ def get_vms():
                 vm = re.sub(r'\s+','',vm)
             else:
                 temp_out[arr[0]] = arr[1].replace('\n', '')
+                temp_out[arr[0]] = re.sub(r'\s+','',temp_out[arr[0]])
         elif len(arr) > 2 and arr[0] == 'State' and 'off' in arr[1]:
             temp_out['state'] = 'off'
         elif len(arr) > 2 and arr[0] == 'State' and 'running' in arr[1]:
