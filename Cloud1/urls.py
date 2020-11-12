@@ -16,13 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Cloud1 import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('change_status/', views.change_status, name='change_status'),
+    path('change_config/', views.change_config, name='change_config')
     path('change_config/', views.change_config, name='change_config'),
     path('clone/', views.clone, name='clone'),
     path('remove/', views.remove, name='remove'),
     path('command/', views.command, name='command'),
 ]
+urlpatterns = urlpatterns + staticfiles_urlpatterns()
