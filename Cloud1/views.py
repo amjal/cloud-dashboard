@@ -46,8 +46,7 @@ def dashboard(request):
             'num_of_cpus': vm.get('Number of CPUs'),
             'state': vm.get('state')
         }
-    info_of_vms = out_vms
-    return render(request, 'index.html', out_vms)
+    return render(request, 'index.html', {'vms':out_vms})
 
 
 def change_status(request):

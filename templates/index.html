@@ -4,14 +4,21 @@
 	<head>
 		<meta name="viewport" content="width-device-width,initial-scale=1">
 		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(".dropdown a").click(function(){
+
+			$("#	
+		</script>
 	</head>
 	<body>
 		<nav>
 			<div class="dropdown">
 				<span> Virtual Machines </span>
 				<div class="dropdown-content">
-					<a href=""> VM1 </a>
-					<a href=""> VM2 </a>
+					{% for key, value in vms.items %}
+						<a href="">{{ value.name  }}</a>
+					{% endfor %}
 				</div>
 			</div>
 			<a href=""> New Virtual Machine </a>
@@ -21,22 +28,16 @@
 			<div class="card-header">
 				<p> Virtual Machine Status </p>
 			</div>
-			<div class="card-item">
-				<span class="field-title"> VM On/Off: </span>
-				<span class="field_value"> blah blah </span>
+			{% for vm, vm_features in vms.items %}
+			<div id="{{vm}}">
+				{% for feature_name, feature_value in vm_features.items %}
+					<div class="card-item" >
+						<span class="field-title">{{feature_name}}: </span>
+						<span class="field_value">{{feature_value}}</span>
+					</div>
+				{% endfor %}
 			</div>
-			<div class="card-item">
-				<span class="field-title"> VM Name: </span>
-				<span class="field_value"> blah blah </span>
-			</div>
-			<div class="card-item">
-				<span class="field-title"> VM Disk Space: </span>
-				<span class="field_value"> blah blah </span>
-			</div>
-			<div class="card-item">
-				<span class="field-title"> VM RAM: </span>
-				<span class="field_value"> blah blah </span>
-			</div>
+			{% endfor %}
 		</div>
 		<div class="card">
 			<div class="card-header">
