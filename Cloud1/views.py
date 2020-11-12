@@ -47,7 +47,7 @@ def dashboard(request):
             'state': vm.get('state')
         }
     info_of_vms = out_vms
-    return render(request, 'index.html', context=out_vms)
+    return render(request, 'index.html', out_vms)
 
 
 def change_status(request):
