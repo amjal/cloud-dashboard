@@ -1,7 +1,7 @@
 import os
 
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 
 info_of_vms = {}
 
