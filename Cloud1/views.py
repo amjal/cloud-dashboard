@@ -61,3 +61,33 @@ def change_status(request):
         os.system(command)
     return redirect('dashboard')
 
+
+def clone(request):
+    vm = request.GET.get('vm')
+    vm_name = request.GET.get('vm_name')
+    if vm is not None and vm_name is not None:
+        command = 'VBoxManage clonevm ' + vm + ' --name=' + vm_name + ' --register --mode=all '
+        os.system(command)
+    return redirect('dashboard')
+
+
+def change_config(request):
+    vm_name = request.GET.get('vm_name')
+    cores = request.GET.get('cores')
+    ram = request.GET.get('ram')
+    if vm_name is not None and cores is not None and ram is not None:
+        command = 'VBoxManage modifyvm ' + vm_name + ' --memory ' + ram + ' --cpus ' + cores
+        os.system(command)
+    return redirect('dashboard')
+
+
+def remove(request):
+    vm_name = request.GET.get('vm_name')
+    if vm_name is not None:
+        command = 'VBoxManage unregistervm ' + vm_name + ' --delete'
+        os.system(command)
+    return redirect('dashboard')
+
+
+def command(request):
+    return HttpResponse('will fix soon')
