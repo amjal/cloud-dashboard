@@ -1,4 +1,5 @@
 import os
+import re
 
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
@@ -21,6 +22,7 @@ def get_vms():
                     out[vm] = temp_out
                     temp_out = {}
                 vm = arr[1].replace('\n', '')
+                vm = re.sub(r'\s+','',vm)
             else:
                 temp_out[arr[0]] = arr[1].replace('\n', '')
         elif len(arr) > 2 and arr[0] == 'State' and 'off' in arr[1]:
