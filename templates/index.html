@@ -29,6 +29,22 @@
 						}
 					});
 				});
+				$("#ram-space-button").click(function(){
+					let ram_space = $("#ram-space").val();
+					$.post('/change_config/',{'vm':current_vm, 'ram-space':ram_space}, function(data, stat){
+						if (data !== ""){
+							$(".field-title:contains('ram') ~ .field-value").text(ram_space);
+						}
+					});
+				});
+				$("#core-numbers-button").click(function(){
+					let core_numbers = $("#core-numbers").val();
+					$.post('/change_config/',{'vm':current_vm, 'core-numbers':core_numbers}, function(data, stat){
+						if (data !== ""){
+							$(".field-title:contains('num_of_cpus') ~ .field-value").text(core_numbers);
+						}
+					});
+				});
 				$(".dropdown-content p").click(function(){
 					current_vm = ($(this).text());
 					const vms = JSON.parse($("#script-id").text());
@@ -83,11 +99,13 @@
 			</div>
 			<div class="card-item">
 				<span class="field-title" class="card-button"> Set CPU Cores: </span>
-				<input type="number" name="core-numbers">
+				<input type="number" id="core-numbers">
+				<button id="core-numbers-button" style="float:right;" class="card-button">submit</span>
 			</div>
 			<div class="card-item">
-				<span class="field-title"> Set Disk Space: </span>
-				<input type="number" name="disk-space">
+				<span class="field-title"> Set Main Memory: </span>
+				<input type="number" id="ram-space">
+				<button id="ram-space-button" class="card-button" style="float:right;">submit</span>
 			</div>
 			<div class="card-item">
 				<button id="delete-button" class="card-button" style="left:40%;"> delete </button>
