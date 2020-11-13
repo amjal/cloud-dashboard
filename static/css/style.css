@@ -67,7 +67,6 @@ input[name="command"]{
 }
 .card-button{
 	position:relative;
-	left:40%;
 	border-radius:5px;
 	border: solid;
 	border-width:1px;

@@ -15,6 +15,15 @@
 						$("#"+vm).css("display","none");
 					}
 				}
+				$("#on-switch").click(function(){
+					$.post('/change_status/',{'vm':current_vm, 'new_state':'on'}, function(data,stat){
+						console.log(data);		
+					});
+				});
+				$("#off-switch").click(function(){
+					$.post('/change_status/',{'vm':current_vm, 'new_state':'off'}, function(data,stat){
+					});
+				});
 				$(".dropdown-content p").click(function(){
 					current_vm = ($(this).text());
 					const vms = JSON.parse($("#script-id").text());
@@ -25,7 +34,6 @@
 						else{
 							$("#"+vm).css("display","block");
 						}
-
 					}
 				});
 			});
@@ -64,22 +72,21 @@
 			<div class="card-header">
 				<p> Manage Virtual Machine </p>
 			</div>
-			<form>
-				<div class="card-item">
-					<button id="on-off-switch" class="card-button"> On/Off </button>
-				</div>
-				<div class="card-item">
-					<span class="field-title" class="card-button"> Set CPU Cores: </span>
-					<input type="number" name="core-numbers">
-				</div>
-				<div class="card-item">
-					<span class="field-title"> Set Disk Space: </span>
-					<input type="number" name="core-numbers">
-				</div>
-				<div class="card-item">
-					<button id="delete-button" class="card-button"> delete </button>
-				</div>
-			</form>
+			<div class="card-item">
+				<button id="on-switch" class="card-button" style="left:20%;"> Turn On </button>
+				<button id="off-switch" class="card-button" style="left:40%;"> Turn Off </button>
+			</div>
+			<div class="card-item">
+				<span class="field-title" class="card-button"> Set CPU Cores: </span>
+				<input type="number" name="core-numbers">
+			</div>
+			<div class="card-item">
+				<span class="field-title"> Set Disk Space: </span>
+				<input type="number" name="disk-space">
+			</div>
+			<div class="card-item">
+				<button id="delete-button" class="card-button" style="left:40%;"> delete </button>
+			</div>
 		</div>
 		<div class="card">
 			<div class="card-header">

@@ -53,8 +53,8 @@ def dashboard(request):
 
 
 def change_status(request):
-    vm_name = request.GET.get('vm')
-    new_state = request.GET.get('new_state')
+    vm_name = request.POST.get('vm')
+    new_state = request.POST.get('new_state')
     command = None
     if new_state == 'off':
         command = 'VBoxManage controlvm  ' + vm_name + ' poweroff'
@@ -62,7 +62,7 @@ def change_status(request):
         command = 'VBoxManage startvm ' + vm_name + ' --type headless'
     if command is not None:
         os.system(command)
-    return redirect('dashboard')
+    return HttpResponse('status changed');
 
 
 def clone(request):
