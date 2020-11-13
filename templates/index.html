@@ -45,6 +45,9 @@
 						}
 					});
 				});
+				$("#delete-button").click(function(){
+					$.post('/remove/',{'vm':current_vm});
+				}
 				$(".dropdown-content p").click(function(){
 					current_vm = ($(this).text());
 					const vms = JSON.parse($("#script-id").text());
