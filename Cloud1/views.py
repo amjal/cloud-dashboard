@@ -71,24 +71,34 @@ def clone(request):
     if vm is not None and vm_name is not None:
         command = 'VBoxManage clonevm ' + vm + ' --name=' + vm_name + ' --register --mode=all '
         os.system(command)
+    # TODO in code et naghese. avalan bayad state vm ha avaz she va in beheshoon ezafe she. baadesham inke bayad yejoori
+    # be front dade beshe ke beshe tooye oon list in vm e jadid namayesh dade beshe
     return redirect('dashboard')
 
 
 def change_config(request):
-    vm_name = request.GET.get('vm_name')
-    cores = request.GET.get('cores')
-    ram = request.GET.get('ram')
-    if vm_name is not None and cores is not None and ram is not None:
-        command = 'VBoxManage modifyvm ' + vm_name + ' --memory ' + ram + ' --cpus ' + cores
+    vm_name = request.POST.get('vm')
+    cores = request.POST.get('core-numbers')
+    ram = request.POST.get('ram-space')
+    response = ""
+    if vm_name is not None:
+        command = 'VBoxManage modifyvm ' + vm_name 
+        if ram is not None:
+            command = command + ' --memory ' + ram
+            response = response + "ram changed "
+        if cores is not None:
+            command = command + ' --cpus ' + cores
+            response = response + "cpus changed "
         os.system(command)
-    return redirect('dashboard')
+    return HttpResponse(response)
 
 
 def remove(request):
-    vm_name = request.GET.get('vm_name')
+    vm_name = request.POST.get('vm')
     if vm_name is not None:
         command = 'VBoxManage unregistervm ' + vm_name + ' --delete'
         os.system(command)
+    #TODO inja ham list e vm ha update nemishe!
     return redirect('dashboard')
 
 
