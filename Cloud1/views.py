@@ -22,10 +22,10 @@ def get_vms():
                     out[vm] = temp_out
                     temp_out = {}
                 vm = arr[1].replace('\n', '')
-                vm = re.sub(r'\s+','',vm)
+                vm = re.sub(r'\s+', '', vm)
             else:
                 temp_out[arr[0]] = arr[1].replace('\n', '')
-                temp_out[arr[0]] = re.sub(r'\s+','',temp_out[arr[0]])
+                temp_out[arr[0]] = re.sub(r'\s+', '', temp_out[arr[0]])
         elif len(arr) > 2 and arr[0] == 'State' and 'off' in arr[1]:
             temp_out['state'] = 'off'
         elif len(arr) > 2 and arr[0] == 'State' and 'running' in arr[1]:
@@ -49,7 +49,8 @@ def dashboard(request):
             'num_of_cpus': vm.get('Number of CPUs'),
             'state': vm.get('state')
         }
-    return render(request, 'index.html', {'vms':out_vms})
+    print(out_vms)
+    return render(request, 'index.html', {'vms': out_vms})
 
 
 def change_status(request):
@@ -62,7 +63,7 @@ def change_status(request):
         command = 'VBoxManage startvm ' + vm_name + ' --type headless'
     if command is not None:
         os.system(command)
-    return HttpResponse('status changed');
+    return HttpResponse('status changed')
 
 
 def clone(request):
@@ -93,4 +94,26 @@ def remove(request):
 
 
 def command(request):
-    return HttpResponse('will fix soon')
+    user_command = request.GET.get('command')
+    vm = request.GET.get('vm')
+    user = request.GET.get('user')
+    password = request.GET.get('password')
+    user_command_parts = user_command.split()
+    command = None
+    if len(user_command_parts) > 0:
+        main_command = user_command_parts[0]
+        command = 'VBoxManage guestcontrol ' + vm + ' run --exe /bin/' + main_command + ' ' + \
+                  user_command + ' --username ' + user + ' --password ' + \
+                  password + '  --wait-stdout'
+    else:
+        command = 'VBoxManage guestcontrol ' + vm + ' run --exe /bin/' + user_command + \
+                  user_command + ' --username ' + user + ' --password ' + \
+                  password + '  --wait-stdout'
+    if command is not None:
+        system_result = os.system(command)
+        result = os.popen(command).read()
+        if system_result == 0:
+            return HttpResponse(result)
+        else:
+            return HttpResponse('your command has problem permission or something else')
+    return HttpResponse('Something went wrong!')
