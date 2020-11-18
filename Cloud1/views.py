@@ -14,6 +14,7 @@ def get_vms():
     out = {}
     temp_out = {}
     count = 0
+    vm = None
     for line in lines:
         arr = line.split(':')
         if len(arr) == 2:
@@ -32,7 +33,8 @@ def get_vms():
             temp_out['state'] = 'on'
         elif len(arr) == 1 and 'Memory size' in arr[0]:
             temp_out['ram'] = arr[0].split()[2]
-    out[vm] = temp_out
+    if vm is not None:
+        out[vm] = temp_out
     os.system('rm text.txt')
     return out
 
@@ -49,7 +51,6 @@ def dashboard(request):
             'num_of_cpus': vm.get('Number of CPUs'),
             'state': vm.get('state')
         }
-    print(out_vms)
     return render(request, 'index.html', {'vms': out_vms})
 
 
@@ -83,7 +84,7 @@ def change_config(request):
     ram = request.POST.get('ram-space')
     response = ""
     if vm_name is not None:
-        command = 'VBoxManage modifyvm ' + vm_name 
+        command = 'VBoxManage modifyvm ' + vm_name
         if ram is not None:
             command = command + ' --memory ' + ram
             response = response + "ram changed "
@@ -99,7 +100,7 @@ def remove(request):
     if vm_name is not None:
         command = 'VBoxManage unregistervm ' + vm_name + ' --delete'
         os.system(command)
-    #TODO inja ham list e vm ha update nemishe!
+    # TODO inja ham list e vm ha update nemishe!
     return redirect('dashboard')
 
 
