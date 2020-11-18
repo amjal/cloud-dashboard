@@ -104,10 +104,10 @@ def remove(request):
 
 
 def command(request):
-    user_command = request.GET.get('command')
-    vm = request.GET.get('vm')
-    user = request.GET.get('user')
-    password = request.GET.get('password')
+    user_command = request.POST.get('command')
+    vm = request.POST.get('vm')
+    user = request.POST.get('user')
+    password = request.POST.get('password')
     user_command_parts = user_command.split()
     command = None
     if len(user_command_parts) > 0:

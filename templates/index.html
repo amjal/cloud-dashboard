@@ -48,6 +48,13 @@
 				$("#delete-button").click(function(){
 					$.post('/remove/',{'vm':current_vm});
 				});
+				$("#command-button").click(function(){
+					let username = $("#username").val();
+					let password = $("#password").val();
+					let command = $("#command").val();
+					console.log(username);
+					//$.post('/command/',{'vm':current_vm, 'user'
+				});
 				$(".dropdown-content p").click(function(){
 					current_vm = ($(this).text());
 					const vms = JSON.parse($("#script-id").text());
@@ -108,7 +115,7 @@
 			<div class="card-item">
 				<span class="field-title"> Set Main Memory: </span>
 				<input type="number" id="ram-space">
-				<button id="ram-space-button" class="card-button" style="float:right;">submit</span>
+				<button id="ram-space-button" class="card-button" style="float:right;">submit</button>
 			</div>
 			<div class="card-item">
 				<button id="delete-button" class="card-button" style="left:40%;"> delete </button>
@@ -118,16 +125,26 @@
 			<div class="card-header">
 				<p> Virtual Machine Interaction </p>
 			</div>
-			<form>
-				<div class="card-item">
-					<span class="field-title"> Input Command: </span>
-					<input type="text" name="command">
-					<span class="field-title"> Command Result: </span>
-				</div>
-				<div class="card-item">
-					<button id="clone-button" class="card-button" style="left:30%"> Clone This Machine </button>
-				</div>
-			</form>
+			<div class="card-item">
+				<span class="field-title"> Input Command: </span>
+				<input type="text" name="command" id="command">
+			</div>
+			<div >
+				<span class="field-title"> User Name: </span>
+				<input type="text" name="username" id="username">
+			</div>
+			<div >
+				<span class="field-title"> Password: </span>
+				<input type="text" name="password" id="password">
+			</div>
+			<button id="command-button" class="card-button" style="left:40%;" >submit</button>
+			<div class="card-item">
+				<span class="field-title"> Command Result: </span>
+				<p id="command-result"></p>
+			</div>
+			<div class="card-item">
+				<button id="clone-button" class="card-button" style="left:30%"> Clone This Machine </button>
+			</div>
 		</div>
 	</body>
 </html>
