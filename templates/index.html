@@ -53,7 +53,9 @@
 					let password = $("#password").val();
 					let command = $("#command").val();
 					console.log(username);
-					//$.post('/command/',{'vm':current_vm, 'user'
+					$.post('/command/',{'vm':current_vm, 'user':username, 'password':password}, function(data,stat){
+						$("#command-result").text(data);
+						});
 				});
 				$(".dropdown-content p").click(function(){
 					current_vm = ($(this).text());
@@ -118,7 +120,7 @@
 				<button id="ram-space-button" class="card-button" style="float:right;">submit</button>
 			</div>
 			<div class="card-item">
-				<button id="delete-button" class="card-button" style="left:40%;"> delete </button>
+				<input class="card-button" type="submit" style="left:40%;"> delete </button>
 			</div>
 		</div>
 		<div class="card">
