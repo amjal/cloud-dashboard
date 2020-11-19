@@ -77,8 +77,8 @@ def change_status(request):
 
 # view for cloning vm
 def clone(request):
-    vm = request.GET.get('vm')
-    vm_name = request.GET.get('vm_name')
+    vm = request.POST.get('vm')
+    vm_name = request.POST.get('vm_name')
     if vm is not None and vm_name is not None:
         # command for cloning vm
         command = 'VBoxManage clonevm ' + vm + ' --name=' + vm_name + ' --register --mode=all '

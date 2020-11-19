@@ -46,14 +46,15 @@
 					});
 				});
 				$("#delete-button").click(function(){
-					$.post('/remove/',{'vm':current_vm});
+					$.post('/remove/',{'vm':current_vm},function(data, stat){
+						location.reload();
+					});
 				});
 				$("#command-button").click(function(){
 					let username = $("#username").val();
 					let password = $("#password").val();
 					let command = $("#command").val();
-					console.log(username);
-					$.post('/command/',{'vm':current_vm, 'user':username, 'password':password}, function(data,stat){
+					$.post('/command/',{'vm':current_vm, 'command': command, 'user':username, 'password':password}, function(data,stat){
 						$("#command-result").text(data);
 						});
 				});
@@ -68,6 +69,12 @@
 							$("#"+vm).css("display","block");
 						}
 					}
+				});
+				$("#clone-button").click(function(){
+					$("#command-result").text("clone request sent. The page will refresh when cloning is finished");
+					$.post('/clone/', {'vm': current_vm, 'vm_name': current_vm+"-clone"}, function(data, stat){
+						location.reload();
+					});
 				});
 			});
 
@@ -120,7 +127,7 @@
 				<button id="ram-space-button" class="card-button" style="float:right;">submit</button>
 			</div>
 			<div class="card-item">
-				<input class="card-button" type="submit" style="left:40%;"> delete </button>
+				<button class="card-button" id="delete-button" style="left:40%;"> delete </button>
 			</div>
 		</div>
 		<div class="card">
@@ -129,15 +136,11 @@
 			</div>
 			<div class="card-item">
 				<span class="field-title"> Input Command: </span>
-				<input type="text" name="command" id="command">
-			</div>
-			<div >
+				<input type="text" id="command" style="display:block;margin:10px;width:90%;">
 				<span class="field-title"> User Name: </span>
-				<input type="text" name="username" id="username">
-			</div>
-			<div >
+				<input type="text" id="username" style="display:block;margin:10px;width:90%;">
 				<span class="field-title"> Password: </span>
-				<input type="text" name="password" id="password">
+				<input type="password" id="password" style="display:block;margin:10px;width:90%;">
 			</div>
 			<button id="command-button" class="card-button" style="left:40%;" >submit</button>
 			<div class="card-item">
